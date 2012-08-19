@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnySmtpTester.Web", "AnySmt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnySmtpTester.Tests", "AnySmtpTester.Tests\AnySmtpTester.Tests.csproj", "{7114E494-F7CD-4F84-9EDD-30D043779CD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnySmtpTester", "AnySmtpTester\AnySmtpTester.csproj", "{9C4E13CB-B456-49B7-93D8-E1FB798A2297}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{7114E494-F7CD-4F84-9EDD-30D043779CD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7114E494-F7CD-4F84-9EDD-30D043779CD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7114E494-F7CD-4F84-9EDD-30D043779CD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C4E13CB-B456-49B7-93D8-E1FB798A2297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C4E13CB-B456-49B7-93D8-E1FB798A2297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C4E13CB-B456-49B7-93D8-E1FB798A2297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C4E13CB-B456-49B7-93D8-E1FB798A2297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

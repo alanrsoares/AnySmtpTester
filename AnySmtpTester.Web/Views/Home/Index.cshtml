@@ -8,7 +8,8 @@
 </p>
 <div class="span-24">
     <form id="anysmtptester">
-        <fieldset id="fsSmtp" title="Smtp Settings" class="span-10">
+    <div class="span-12">
+        <fieldset id="fsSmtp" title="Smtp Settings">
             <legend>SMTP</legend>
             <div class="editor-label">
                 <label for="txtHost">
@@ -49,8 +50,9 @@
                 <input id="txtPassword" class="text-box" type="password" />
             </div>
         </fieldset>
-
-        <fieldset id="fsMail" title="Email Settings" class="span-12 last">
+    </div>
+    <div class="span-12 last">
+        <fieldset id="fsMail" title="Email Settings">
             <legend>Email</legend>
             <div class="editor-label">
                 <label for="txtFrom">
@@ -66,7 +68,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtTo" type="text" />
+                <input id="txtTo" type="text"/>
                 <span>(comma sepparated email addresses)</span>
             </div>
             <div class="editor-label">
@@ -86,8 +88,9 @@
                 <textarea id="txtMailBody"></textarea>
             </div>
         </fieldset>
-
-        <fieldset id="fsStatus" title="Server Status" class="span-24">
+    </div>
+    <div class="span-24 last">
+        <fieldset id="fsStatus" title="Server Status">
             <legend>Server Status</legend>
             <div class="editor-label">
                 <label for="txtServerStatus">
@@ -98,5 +101,6 @@
                 <textarea id="txtServerStatus"></textarea>
             </div>
         </fieldset>
+    </div>
     </form>
 </div>
