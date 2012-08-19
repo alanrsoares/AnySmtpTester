@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "AnySmtp Tester";
+    Layout = "~/Views/Shared/_Blueprint.cshtml";
+}
+<h2>@ViewBag.Message</h2>
+<p>
+    Test Any SMTP Server with AnySmtp Tester.
+</p>
+<div class="span-24">
+    <form id="anysmtptester">
+    <div class="span-12 last">
+        <fieldset id="fsSmtp" title="Smtp Settings">
+            <legend>SMTP</legend>
+            <div class="editor-label">
+                <label for="txtHost">
+                    Host:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtHost" type="text" />
+            </div>
+            <div class="editor-label">
+                <label for="txtPort">
+                    Port:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtPort" type="text" />
+            </div>
+            <div class="editor-field">
+                <input id="chkIsSsl" type="checkbox" />
+                <label for="chkIsSsl">
+                    Enable SSL?
+                </label>
+            </div>
+            <div class="editor-label">
+                <label for="txtUser">
+                    User:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtUser" type="text" />
+            </div>
+            <div class="editor-label">
+                <label for="txtPassword">
+                    Password:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtPassword" class="text-box" type="password" />
+            </div>
+        </fieldset>
+    </div>
+    <div class="span-12 last">
+        <fieldset id="fsMail" title="Email Settings">
+            <legend>Email</legend>
+            <div class="editor-label">
+                <label for="txtFrom">
+                    From:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtFrom" type="text" />
+            </div>
+            <div class="editor-label">
+                <label for="txtTo">
+                    To:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtTo" type="text" />
+                <span>(comma sepparated email addresses)</span>
+            </div>
+            <div class="editor-label">
+                <label for="txtSubject">
+                    Subject:
+                </label>
+            </div>
+            <div class="editor-field">
+                <input id="txtSubject" type="text" />
+            </div>
+            <div class="editor-label">
+                <label for="txtMailBody">
+                    Body:
+                </label>
+            </div>
+            <div class="editor-field">
+                <textarea id="txtMailBody"></textarea>
+            </div>
+        </fieldset>
+    </div>
+    <div class="span-24">
+        <fieldset id="fsStatus" title="Server Status">
+            <legend>Server Status</legend>
+            <div class="editor-label">
+                <label for="txtServerStatus">
+                    Status Message:
+                </label>
+            </div>
+            <div class="editor-field">
+                <textarea id="txtServerStatus"></textarea>
+            </div>
+        </fieldset>
+    </div>
+    </form>
+</div>
