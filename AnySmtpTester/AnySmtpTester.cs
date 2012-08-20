@@ -108,10 +108,11 @@ namespace AnySmtpTester
             var hostEntry = Dns.GetHostEntry(smtpServerAddress);
             var endPoint = new IPEndPoint(hostEntry.AddressList[0], port);
 
-            
+
             using (var tcpSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 //try to connect and test the rsponse for code 220 = success
+
                 tcpSocket.Connect(endPoint);
                 if (!CheckResponse(tcpSocket, 220))
                 {
@@ -135,10 +136,16 @@ namespace AnySmtpTester
 
         private static bool CheckResponse(Socket socket, int expectedCode)
         {
-            while (socket.Available == 0)
+            const int maxTimeOut = 5000;
+            const int sleepTime = 100;
+            var timeOut = 0;
+
+            while (socket.Available == 0 && timeOut < maxTimeOut)
             {
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(sleepTime);
+                timeOut += sleepTime;
             }
+
             var responseArray = new byte[1024];
             socket.Receive(responseArray, 0, socket.Available, SocketFlags.None);
             var responseData = Encoding.ASCII.GetString(responseArray);
