@@ -1,10 +1,6 @@
 ﻿@{
     ViewBag.Title = "AnySmtp Tester";
     Layout = "~/Views/Shared/_Blueprint.cshtml";
-    
-}
-@section head{
-    <script src="@Url.Content("~/Scripts/anysmtptester.js")" type="text/javascript"></script>
 }
 <h2>@ViewBag.Message</h2>
 <p>
@@ -13,7 +9,7 @@
 <div class="span-24">
     <form id="anysmtptester">
     <div class="span-8">
-        <fieldset id="fsSmtp">
+        <fieldset id="fsSmtp" title="Smtp Settings">
             <legend>SMTP</legend>
             <div class="editor-label">
                 <label for="txtHost">
@@ -56,7 +52,7 @@
         </fieldset>
     </div>
     <div class="span-16 last">
-        <fieldset id="fsMail">
+        <fieldset id="fsMail" title="Email Settings">
             <legend>Email</legend>
             <div class="editor-label">
                 <label for="txtFrom">
@@ -97,7 +93,7 @@
         TEST SMTP SERVER
     </div>
     <div class="span-24 last">
-        <fieldset id="fsStatus">
+        <fieldset id="fsStatus" title="Server Status">
             <legend>Server Status</legend>
             <div class="editor-label">
                 <label for="txtServerStatus">
@@ -105,9 +101,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <textarea class="text-box multi-line" readonly="readonly" id="txtServerStatus">
-$SMTP>> Console for SMTP Status:
-                </textarea>
+                <textarea class="text-box multi-line" id="txtServerStatus"></textarea>
             </div>
         </fieldset>
     </div>

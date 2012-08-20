@@ -19,5 +19,10 @@ namespace AnySmtpTester.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult BluePrint()
+        {
+            return View("BluePrintTest");
+        }
     }
 }
