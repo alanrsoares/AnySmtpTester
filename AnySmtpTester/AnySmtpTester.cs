@@ -120,7 +120,7 @@ namespace AnySmtpTester
                 }
 
                 // send HELO and test the response for code 250 = proper response
-                SendData(tcpSocket, string.Format("HELO {0}\r\n", Dns.GetHostName()));
+                SendData(tcpSocket, string.Format("EHLO {0}\r\n", Dns.GetHostName()));
 
                 return CheckResponse(tcpSocket, 250);
 
@@ -145,6 +145,9 @@ namespace AnySmtpTester
                 System.Threading.Thread.Sleep(sleepTime);
                 timeOut += sleepTime;
             }
+
+            if (timeOut >= maxTimeOut)
+                return false;
 
             var responseArray = new byte[1024];
             socket.Receive(responseArray, 0, socket.Available, SocketFlags.None);
