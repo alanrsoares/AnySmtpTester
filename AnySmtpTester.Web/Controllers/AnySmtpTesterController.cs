@@ -21,6 +21,7 @@ namespace AnySmtpTester.Web.Controllers
             return Json(SmtpHelper.TestConnection(host, port), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult Sendmail()
         {
             var smtpClient = new SmtpClient
@@ -33,14 +34,14 @@ namespace AnySmtpTester.Web.Controllers
                                  };
             try
             {
-                new AnySmtpTester(smtpClient).SendMessage("", "alan.soares@vtex.com.br", "teste", "teste message");
+                new AnySmtpTester(smtpClient).SendMessage("vendas@ticoticabum.com.br", "alan.soares@vtex.com.br", "teste", "teste message");
 
-                return Json(new { Success = true });
+                return Json(new { Success = true },JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
 
-                return Json(new { Success = false });
+                return Json(new { Success = false },JsonRequestBehavior.AllowGet);
             }
 
 

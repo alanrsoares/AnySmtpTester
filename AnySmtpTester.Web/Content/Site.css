@@ -374,7 +374,7 @@ div.container
     background-color: #fff;
 }
 
-#testButton
+.bigButton
 {
     background-color: #ccc;
     color: #666;
@@ -386,7 +386,7 @@ div.container
     margin: 1em;
 }
 
-#testButton:hover
+.bigButton:hover
 {
     background-color: green;
     color: #fff;
@@ -397,9 +397,15 @@ div.container
     background-color: #eee;
 }
 
-fieldset#fsStatus textarea
+fieldset#fsStatus
 {
-    background: #333;
-    color: Green;
-    font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+    display: none;
+}
+
+pre.console
+{
+    background: #222;
+    color: lime;
+    font-family: "Lucida Sans Typewriter" , "Lucida Console" , Monaco, "Bitstream Vera Sans Mono" , monospace;
+    padding: 5px;
 }

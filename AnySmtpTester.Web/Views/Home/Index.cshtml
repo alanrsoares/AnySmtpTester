@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Blueprint.cshtml";
     
 }
-
 @section head{
     <script src="@Url.Content("~/Scripts/anysmtptester.main.js")" type="text/javascript"></script>
 }
@@ -94,8 +93,17 @@
             </div>
         </fieldset>
     </div>
-    <div id="testButton">
-        TEST SMTP SERVER
+    <div class="span-24 last">
+        <div class="span-12">
+            <div id="btnTest" class="bigButton">
+                TEST SMTP SERVER
+            </div>
+        </div>
+        <div class="span-12 last">
+            <div id="btnSendMail" class="bigButton">
+                SEND EMAIL
+            </div>
+        </div>
     </div>
     <div class="span-24 last">
         <fieldset id="fsStatus">
@@ -106,10 +114,13 @@
                 </label>
             </div>
             <div class="editor-field">
-                <textarea class="text-box multi-line" readonly="readonly" id="txtServerStatus">
-$SMTP>> Console for SMTP Status:
-.
-                </textarea>
+                <pre class="console" id="txtServerStatus">
+$ telnet smtp.gmail.com 465
+>
+    220 mx.gmail.com 65a4sd98as74d84a
+EHLO client.host
+    250
+                </pre>
             </div>
         </fieldset>
     </div>
