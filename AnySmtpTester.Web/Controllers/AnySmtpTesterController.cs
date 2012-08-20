@@ -10,13 +10,13 @@ namespace AnySmtpTester.Web.Controllers
     {
         //
         // GET: /AnySmtpTester/
-
+        
         public JsonResult Index()
         {
             var host = "smtp.ticoticabum.com.br";
             var port = 25;
 
-            return Json(SmtpHelper.TestConnection(host, port));
+            return Json(SmtpHelper.TestConnection(host, port),JsonRequestBehavior.AllowGet);
         }
 
     }
