@@ -1,40 +1,23 @@
-﻿using AnySmtpTester;
+﻿using System.Net.Mail;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Net.Mail;
 
 namespace AnySmtpTester.Tests
 {
-    
-    
     /// <summary>
     ///This is a test class for AnySmtpTesterTest and is intended
     ///to contain all AnySmtpTesterTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class AnySmtpTesterTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
+
         // 
         //You can use the following additional attributes as you write your tests:
         //
@@ -62,24 +45,24 @@ namespace AnySmtpTester.Tests
         //{
         //}
         //
-        #endregion
 
+        #endregion
 
         /// <summary>
         ///A test for AnySmtpTester Constructor
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void AnySmtpTesterConstructorTest()
         {
             SmtpClient smtpClient = null; // TODO: Initialize to an appropriate value
-            AnySmtpTester target = new AnySmtpTester(smtpClient);
+            var target = new AnySmtpTester(smtpClient);
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
 
         /// <summary>
         ///A test for AnySmtpTester Constructor
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void AnySmtpTesterConstructorTest1()
         {
             string host = string.Empty; // TODO: Initialize to an appropriate value
@@ -87,18 +70,18 @@ namespace AnySmtpTester.Tests
             bool enableSsl = false; // TODO: Initialize to an appropriate value
             string user = string.Empty; // TODO: Initialize to an appropriate value
             string password = string.Empty; // TODO: Initialize to an appropriate value
-            AnySmtpTester target = new AnySmtpTester(host, port, enableSsl, user, password);
+            var target = new AnySmtpTester(host, port, enableSsl, user, password);
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
 
         /// <summary>
         ///A test for GetServerStatus
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetServerStatusTest()
         {
             SmtpClient smtpClient = null; // TODO: Initialize to an appropriate value
-            AnySmtpTester target = new AnySmtpTester(smtpClient); // TODO: Initialize to an appropriate value
+            var target = new AnySmtpTester(smtpClient); // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
             string actual;
             actual = target.GetServerStatus();
@@ -109,11 +92,11 @@ namespace AnySmtpTester.Tests
         /// <summary>
         ///A test for SendMessage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SendMessageTest()
         {
             SmtpClient smtpClient = null; // TODO: Initialize to an appropriate value
-            AnySmtpTester target = new AnySmtpTester(smtpClient); // TODO: Initialize to an appropriate value
+            var target = new AnySmtpTester(smtpClient); // TODO: Initialize to an appropriate value
             string from = string.Empty; // TODO: Initialize to an appropriate value
             string to = string.Empty; // TODO: Initialize to an appropriate value
             string subject = string.Empty; // TODO: Initialize to an appropriate value
@@ -128,11 +111,11 @@ namespace AnySmtpTester.Tests
         /// <summary>
         ///A test for SendTestMessage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SendTestMessageTest()
         {
             SmtpClient smtpClient = null; // TODO: Initialize to an appropriate value
-            AnySmtpTester target = new AnySmtpTester(smtpClient); // TODO: Initialize to an appropriate value
+            var target = new AnySmtpTester(smtpClient); // TODO: Initialize to an appropriate value
             string from = string.Empty; // TODO: Initialize to an appropriate value
             string to = string.Empty; // TODO: Initialize to an appropriate value
             object expected = null; // TODO: Initialize to an appropriate value
@@ -145,12 +128,12 @@ namespace AnySmtpTester.Tests
         /// <summary>
         ///A test for Client
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("AnySmtpTester.dll")]
         public void ClientTest()
         {
             PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            AnySmtpTester_Accessor target = new AnySmtpTester_Accessor(param0); // TODO: Initialize to an appropriate value
+            var target = new AnySmtpTester_Accessor(param0); // TODO: Initialize to an appropriate value
             SmtpClient expected = null; // TODO: Initialize to an appropriate value
             SmtpClient actual;
             target.Client = expected;

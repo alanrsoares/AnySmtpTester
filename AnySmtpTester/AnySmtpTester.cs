@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
 
@@ -89,7 +90,7 @@ namespace AnySmtpTester
         #endregion
 
         #region Private Methods
-        
+
 
         #endregion
 
@@ -104,8 +105,11 @@ namespace AnySmtpTester
         /// <param name="port"></param>
         public static bool TestConnection(string smtpServerAddress, int port)
         {
-            IPHostEntry hostEntry = Dns.GetHostEntry(smtpServerAddress);
+            var hostEntry = Dns.GetHostEntry(smtpServerAddress);
             var endPoint = new IPEndPoint(hostEntry.AddressList[0], port);
+
+
+
             using (var tcpSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 //try to connect and test the rsponse for code 220 = success
