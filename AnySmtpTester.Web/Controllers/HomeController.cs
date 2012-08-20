@@ -10,7 +10,7 @@ namespace AnySmtpTester.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            ViewBag.Message = "AnySMTP Tester";
 
             return View();
         }
