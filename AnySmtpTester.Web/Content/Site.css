@@ -323,6 +323,29 @@ div#title {
     width: 6em;
 }
 
+/* custom css*/
+
 div.container {
-    background-color: #ffffff;
+    background-color: #fff;
+}
+
+#testButton 
+{
+    background-color: #ccc;
+    color: #666;
+    text-align: center;
+    padding: 5px 0;
+    cursor: pointer;
+    font-weight: bold;
+    clear: both;
+    margin: 1em;
+}
+
+#testButton:hover {
+    background-color: green;
+    color: #fff;
+}
+
+.container fieldset {
+    background-color: #eee;
 }

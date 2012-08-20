@@ -8,7 +8,7 @@
 </p>
 <div class="span-24">
     <form id="anysmtptester">
-    <div class="span-12">
+    <div class="span-10">
         <fieldset id="fsSmtp" title="Smtp Settings">
             <legend>SMTP</legend>
             <div class="editor-label">
@@ -17,7 +17,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtHost" type="text" />
+                <input id="txtHost" class="text-box" type="text" />
             </div>
             <div class="editor-label">
                 <label for="txtPort">
@@ -25,7 +25,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtPort" type="text" />
+                <input id="txtPort" class="text-box" type="text" />
             </div>
             <div class="editor-field">
                 <input id="chkIsSsl" type="checkbox" />
@@ -39,7 +39,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtUser" type="text" />
+                <input id="txtUser" class="text-box" type="text" />
             </div>
             <div class="editor-label">
                 <label for="txtPassword">
@@ -51,7 +51,7 @@
             </div>
         </fieldset>
     </div>
-    <div class="span-12 last">
+    <div class="span-14 last">
         <fieldset id="fsMail" title="Email Settings">
             <legend>Email</legend>
             <div class="editor-label">
@@ -60,7 +60,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtFrom" type="text" />
+                <input id="txtFrom" class="text-box" type="text" />
             </div>
             <div class="editor-label">
                 <label for="txtTo">
@@ -68,7 +68,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtTo" type="text"/>
+                <input id="txtTo" class="text-box" type="text" />
                 <span>(comma sepparated email addresses)</span>
             </div>
             <div class="editor-label">
@@ -77,7 +77,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <input id="txtSubject" type="text" />
+                <input id="txtSubject" class="text-box" type="text" />
             </div>
             <div class="editor-label">
                 <label for="txtMailBody">
@@ -85,9 +85,12 @@
                 </label>
             </div>
             <div class="editor-field">
-                <textarea id="txtMailBody"></textarea>
+                <textarea class="text-box multi-line" id="txtMailBody"></textarea>
             </div>
         </fieldset>
+    </div>
+    <div id="testButton">
+        TEST SMTP SERVER
     </div>
     <div class="span-24 last">
         <fieldset id="fsStatus" title="Server Status">
@@ -98,7 +101,7 @@
                 </label>
             </div>
             <div class="editor-field">
-                <textarea id="txtServerStatus"></textarea>
+                <textarea class="text-box multi-line" id="txtServerStatus"></textarea>
             </div>
         </fieldset>
     </div>
