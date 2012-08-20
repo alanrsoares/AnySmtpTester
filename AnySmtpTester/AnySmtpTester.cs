@@ -108,8 +108,7 @@ namespace AnySmtpTester
             var hostEntry = Dns.GetHostEntry(smtpServerAddress);
             var endPoint = new IPEndPoint(hostEntry.AddressList[0], port);
 
-
-
+            
             using (var tcpSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 //try to connect and test the rsponse for code 220 = success
