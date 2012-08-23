@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "AnySmtp Tester";
-    Layout = "~/Views/Shared/_Blueprint.cshtml";
+    Layout = "~/Views/Shared/_TwitterBootstrap.cshtml";
     
 }
 @section head{
@@ -10,31 +10,27 @@
 <p>
     Test Any SMTP Server with AnySmtp Tester.
 </p>
-<div class="span-24">
+<div class="row">
     <form id="anysmtptester">
-    <div class="span-8">
-        <fieldset id="fsSmtp">
+    <div class="span4">
+        <fieldset id="fsSmtp" class="well">
             <legend>SMTP</legend>
-            <div class="editor-label">
+            <div class="editor-field">
                 <label for="txtHost">
                     Host:
                 </label>
+                <input id="txtHost" class="text-box" type="text" placeholder="smtp.yourdomain.com"/>
             </div>
+            <label for="txtPort">
+                Port:
+            </label>
             <div class="editor-field">
-                <input id="txtHost" class="text-box" type="text" />
-            </div>
-            <div class="editor-label">
-                <label for="txtPort">
-                    Port:
-                </label>
-            </div>
-            <div class="editor-field">
-                <input id="txtPort" class="text-box" type="text" />
+                <input id="txtPort" class="text-box" type="text" placeholder="25" />
             </div>
             <div class="editor-field">
                 <input id="chkIsSsl" type="checkbox" />
                 <label for="chkIsSsl">
-                    Enable SSL?
+                    <span class="help-inline">Enable SSL? </span>
                 </label>
             </div>
             <div class="editor-label">
@@ -55,8 +51,8 @@
             </div>
         </fieldset>
     </div>
-    <div class="span-16 last">
-        <fieldset id="fsMail">
+    <div class="span4">
+        <fieldset id="fsMail" class="well">
             <legend>Email</legend>
             <div class="editor-label">
                 <label for="txtFrom">
@@ -73,7 +69,7 @@
             </div>
             <div class="editor-field">
                 <input id="txtTo" class="text-box" type="text" />
-                <span>(comma sepparated email addresses)</span>
+                <span class="help-inline">(comma sepparated email addresses)</span>
             </div>
             <div class="editor-label">
                 <label for="txtSubject">
@@ -93,36 +89,36 @@
             </div>
         </fieldset>
     </div>
-    <div class="span-24 last">
-        <div class="span-12">
-            <div id="btnTest" class="bigButton">
-                TEST SMTP SERVER
-            </div>
-        </div>
-        <div class="span-12 last">
-            <div id="btnSendMail" class="bigButton">
-                SEND EMAIL
-            </div>
-        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="span6">
+        <button id="btnTest" class="btn-large btn-warning span5">
+            TEST SMTP SERVER
+        </button>
     </div>
-    <div class="span-24 last">
-        <fieldset id="fsStatus">
-            <legend>Server Status</legend>
-            <div class="editor-label">
-                <label for="txtServerStatus">
-                    Status Message:
-                </label>
-            </div>
-            <div class="editor-field">
-                <pre class="console" id="txtServerStatus">
+    <div class="span6">
+        <button id="btnSendMail" class="btn-large btn-success span5">
+            SEND EMAIL
+        </button>
+    </div>
+</div>
+<div class="row">
+    <fieldset id="fsStatus" class="well">
+        <legend>Server Status</legend>
+        <div class="editor-label">
+            <label for="txtServerStatus">
+                Status Message:
+            </label>
+        </div>
+        <div class="editor-field">
+            <pre class="console" id="txtServerStatus">
 $ telnet smtp.gmail.com 465
 >
     220 mx.gmail.com 65a4sd98as74d84a
     EHLO client.host
     250
                 </pre>
-            </div>
-        </fieldset>
-    </div>
-    </form>
+        </div>
+    </fieldset>
 </div>

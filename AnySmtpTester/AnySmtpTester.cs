@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace AnySmtpTester
 {
@@ -96,36 +100,134 @@ namespace AnySmtpTester
 
     }
 
+
     public static class SmtpHelper
     {
-        /// <summary>
-        /// test the smtp connection by sending a HELO command
-        /// </summary>
-        /// <param name="smtpServerAddress"></param>
-        /// <param name="port"></param>
-        public static bool TestConnection(string smtpServerAddress, int port)
+        public static bool TestSmtpServer(string hostName, int hostPort)
         {
-            var hostEntry = Dns.GetHostEntry(smtpServerAddress);
-            var endPoint = new IPEndPoint(hostEntry.AddressList[0], port);
+            var responseData = GetResponse(hostName, hostPort, "EHLO");
+            return CheckResponse(responseData, new[] { 220, 250 });
+        }
 
+        public static string GetResponse(string hostName, int hostPort, string message)
+        {
 
-            using (var tcpSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
+            try
             {
-                //try to connect and test the rsponse for code 220 = success
-
-                tcpSocket.Connect(endPoint);
-                if (!CheckResponse(tcpSocket, 220))
-                {
-                    return false;
-                }
-
-                // send HELO and test the response for code 250 = proper response
-                SendData(tcpSocket, string.Format("EHLO {0}\r\n", Dns.GetHostName()));
-
-                return CheckResponse(tcpSocket, 250);
-
-                // if we got here it's that we can connect to the smtp server
+                return GetSslResponse(hostName, hostPort, message);
             }
+            catch (IOException)
+            {
+                try
+                {
+                    return GetNonSslResponse(hostName, hostPort, message);
+                }
+                catch (SocketException socket)
+                {
+                    return "SocketException: " + socket.Message;
+                }
+            }
+            catch (SocketException socket)
+            {
+                return "SocketException: " + socket.Message;
+            }
+            catch (Exception e)
+            {
+                return "GenericException: " + e.Message;
+            }
+        }
+
+        public static string GetSslResponse(string hostName, int hostPort, string message)
+        {
+            using (var client = new TcpClient())
+            {
+                client.Connect(hostName, hostPort);
+
+                using (var stream = client.GetStream())
+                using (var sslStream = new SslStream(stream, false))
+                {
+                    sslStream.AuthenticateAsClient(hostName);
+                    using (var writer = new StreamWriter(sslStream))
+                    using (var reader = new StreamReader(sslStream))
+                    {
+                        writer.WriteLine("{0} {1}\r\n", message, Dns.GetHostName());
+                        writer.Flush();
+                        return reader.ReadLine();
+                    }
+                }
+            }
+        }
+
+        public static string GetNonSslResponse(string hostName, int hostPort, string message)
+        {
+            try
+            {
+                //FallBack to non-ssl test
+
+                var hostEntry = Dns.GetHostEntry(hostName);
+                var endPoint = new IPEndPoint(hostEntry.AddressList[0], hostPort);
+
+
+                using (var tcpSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
+                {
+                    tcpSocket.Connect(endPoint);
+                    if (!CheckResponse(GetResponse(tcpSocket), 220))
+                    {
+                        return string.Format("Unexpected Response from host {0} at port {1}", hostName, hostPort);
+                    }
+
+                    SendData(tcpSocket, String.Format("{0} {1}\r\n", message, Dns.GetHostName()));
+
+                    return GetResponse(tcpSocket);
+                }
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        private static bool CheckResponse(string responseData, int expectedCode)
+        {
+            return (ParseResponseCode(responseData) == expectedCode);
+        }
+
+        private static bool CheckResponse(string responseData, IEnumerable<int> expectedCodes)
+        {
+            return expectedCodes.Contains(ParseResponseCode(responseData));
+        }
+
+        private static int ParseResponseCode(string responseData)
+        {
+            int i;
+            var responseCode = string.IsNullOrEmpty(responseData) || !int.TryParse(responseData.Substring(0, 3), out i)
+                ? 0
+                : i;
+
+            return responseCode;
+        }
+
+        private static string GetResponse(Socket socket)
+        {
+            const int maxTimeOut = 5000;
+            const int sleepTime = 100;
+            var timeOut = 0;
+
+            while (socket.Available == 0 && timeOut < maxTimeOut)
+            {
+                Thread.Sleep(sleepTime);
+                timeOut += sleepTime;
+            }
+
+            if (timeOut >= maxTimeOut)
+                return "";
+
+            var responseArray = new byte[1024];
+            socket.Receive(responseArray, 0, socket.Available, SocketFlags.None);
+            var responseData = Encoding.ASCII.GetString(responseArray);
+
+            return responseData;
+
         }
 
         private static void SendData(Socket socket, string data)
@@ -134,26 +236,22 @@ namespace AnySmtpTester
             socket.Send(dataArray, 0, dataArray.Length, SocketFlags.None);
         }
 
-        private static bool CheckResponse(Socket socket, int expectedCode)
+        public static void SendMail(SmtpClient client, string from, string to, string subject, string body)
         {
-            const int maxTimeOut = 5000;
-            const int sleepTime = 100;
-            var timeOut = 0;
-
-            while (socket.Available == 0 && timeOut < maxTimeOut)
+            var message = new MailMessage
             {
-                System.Threading.Thread.Sleep(sleepTime);
-                timeOut += sleepTime;
-            }
+                From = new MailAddress(from),
+                Subject = subject ?? "",
+                Body = body,
+            };
 
-            if (timeOut >= maxTimeOut)
-                return false;
+            message.To.Add(new MailAddress(to));
 
-            var responseArray = new byte[1024];
-            socket.Receive(responseArray, 0, socket.Available, SocketFlags.None);
-            var responseData = Encoding.ASCII.GetString(responseArray);
-            var responseCode = Convert.ToInt32(responseData.Substring(0, 3));
-            return responseCode == expectedCode;
+            client.Send(message);
+
         }
+
     }
+
+
 }
