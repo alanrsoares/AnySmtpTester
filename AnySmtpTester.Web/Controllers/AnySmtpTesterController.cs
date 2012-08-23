@@ -18,7 +18,7 @@ namespace AnySmtpTester.Web.Controllers
             var host = "smtp.ticoticabum.com.br";
             var port = 25;
 
-            return Json(SmtpHelper.TestConnection(host, port), JsonRequestBehavior.AllowGet);
+            return Json(SmtpHelper.GetResponse(host, port, "EHLO"));
         }
 
         [HttpPost]
@@ -36,12 +36,12 @@ namespace AnySmtpTester.Web.Controllers
             {
                 new AnySmtpTester(smtpClient).SendMessage("vendas@ticoticabum.com.br", "alan.soares@vtex.com.br", "teste", "teste message");
 
-                return Json(new { Success = true },JsonRequestBehavior.AllowGet);
+                return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
 
-                return Json(new { Success = false },JsonRequestBehavior.AllowGet);
+                return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
             }
 
 
